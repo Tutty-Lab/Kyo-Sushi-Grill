@@ -603,8 +603,10 @@ const GROUP_RANGES = [
 ] as const;
 const GROUP_WINDOWS = (["KITCHEN", "SERVICE", "DRIVER"] as const).flatMap((group) =>
   GROUP_RANGES.map(([key, range, title, from, to]) => ({
-    key: `${group}-${key}`, range, title, group, from, to,
-    need: group !== "DRIVER" && isRequiredCoverage(from) ? 1 : 0,
+    key: `${group}-${key}`, range: group === "DRIVER" && key === "early" ? "17–18" : range,
+    title: group === "DRIVER" && key === "early" ? "17:00–18:00" : title, group,
+    from: group === "DRIVER" && key === "early" ? 1020 : from, to,
+    need: group === "DRIVER" ? (key === "noon" ? 0 : 1) : isRequiredCoverage(from) ? 1 : 0,
   })),
 );
 

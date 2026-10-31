@@ -633,6 +633,19 @@ function EmployeeSheet({
               />
             </label>
             <div>
+              <FieldLabel>Bộ phận</FieldLabel>
+              <Segmented<Station>
+                value={d.station}
+                onChange={(v) => set("station", v)}
+                options={[
+                  { value: "KITCHEN", label: "Bếp" },
+                  { value: "SERVICE", label: "Bồi" },
+                  { value: "DRIVER", label: "Tài xế" },
+                  { value: "BOTH", label: "Bếp / Bồi" },
+                ]}
+              />
+            </div>
+            <div>
               <FieldLabel>Hình thức</FieldLabel>
               <Segmented<EmploymentType>
                 value={d.employmentType}
@@ -662,11 +675,6 @@ function EmployeeSheet({
             </label>
           </SheetSection>
 
-          <label className="block text-sm">Bộ phận
-            <select className="ml-2 rounded border p-2" value={d.station} onChange={e => set("station", e.target.value as Station)}>
-              <option value="KITCHEN">Bếp</option><option value="SERVICE">Bồi</option><option value="DRIVER">Tài xế</option><option value="BOTH">Bếp / Bồi</option>
-            </select>
-          </label>
           {/* Nâng cao: alles außer Tên, Hình thức, Bộ phận, Giờ. In der Demo gesperrt. */}
           <section className="rounded-lg border border-slate-200">
             <button
