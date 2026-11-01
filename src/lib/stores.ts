@@ -17,7 +17,7 @@ const rules: readonly StaffingRule[] = [
 export const STORES: StoreConfig[] = [{id:"kyo-sushi",name:"Kyo sushi & grill",shortName:"Kyo",address:"Ledergasse 22, 73525 Schwäbisch Gmünd",sampleEmployees:kyoEmployees,workHours:KYO_HOURS,staffingRules:rules,
  demandProfile:[{startMinutes:600,endMinutes:840,level:0.5,label:"Trưa"},{startMinutes:990,endMinutes:1080,level:1,label:"Đầu tối"},{startMinutes:1080,endMinutes:1260,level:1.5,label:"Cao điểm"},{startMinutes:1260,endMinutes:1320,level:0.8,label:"Cuối tối"}],
  dayWeights:{monday:1,tuesday:1,wednesday:1,thursday:1,friday:1.5,saturday:1.5,sunday:1},
- notes:"Định mức giờ/tháng theo bảng nhân viên tháng 10; tổng 1.228h, tài xế 88h. Tài xế Minijob ưu tiên 17–22h, có thể làm ban ngày. Mỗi ngày 10–14h, 16:30–22h; lễ như bình thường. Cao điểm 18–21h; thứ 6–7 hệ số 1,5. Mức tối thiểu tạm: 1 bếp + 1 bồi trong giờ mở; bồi 18–21h tối thiểu 2, thứ 6–7 tối thiểu 3 (lễ theo hệ số Chủ nhật); tài xế phân bổ theo định mức, ưu tiên 17–22h."}];
+ notes:"Định mức giờ/tháng theo bảng nhân viên tháng 10; tổng 1.228h, tài xế 88h. Tài xế Minijob ưu tiên phủ 18–21h trước, sau đó 17–22h; có thể làm ban ngày. Mỗi ngày 10–14h, 16:30–22h; lễ như bình thường. Cao điểm 18–21h; thứ 6–7 hệ số 1,5. Mức tối thiểu tạm: 1 bếp + 1 bồi trong giờ mở; bồi 18–21h tối thiểu 2, thứ 6–7 tối thiểu 3 (lễ theo hệ số Chủ nhật); tài xế phân bổ theo định mức, ưu tiên phủ 18–21h trước."}];
 export const DEFAULT_STORE_ID = STORES[0].id;
 
 /** Merkt sich die zuletzt gewählte Filiale auf diesem Gerät. */

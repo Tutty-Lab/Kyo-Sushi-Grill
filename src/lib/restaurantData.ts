@@ -28,6 +28,6 @@ export function kyoEmployees(): Employee[] {
   return {...makeEmployee(`kyo-${n}`,KYO_EMPLOYEE_DETAILS[n].name,driver?"MINIJOB":"VOLLZEIT",KYO_EMPLOYEE_DETAILS[n].hours),
    hourlyRate:KYO_EMPLOYEE_DETAILS[n].hourlyRate,
    station,role:driver?"Tài xế":station==="KITCHEN"?"Bếp":"Bồi",quotaSource:"hours",
-   preferredWindows:driver?[{days:[...DAYS],startMinutes:1020,endMinutes:1320}]:undefined} satisfies Employee;
+   preferredWindows:driver?[{days:[...DAYS],startMinutes:1080,endMinutes:1260}]:undefined} satisfies Employee;
  });
 }
