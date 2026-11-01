@@ -35,7 +35,7 @@ export type Rule = { id: RuleId; kind: RuleKind; title: string; detail: string }
 
 export const RULES: readonly Rule[] = [
   { id: "open-hours", kind: "hard", title: "Chỉ trong giờ mở cửa", detail: "Ngày quán đóng cửa và giờ nghỉ trưa không xếp ca." },
-  { id: "closing", kind: "hard", title: "Đủ người theo khung vận hành", detail: "Ít nhất 1 bếp và 1 bồi suốt giờ mở cửa; tài xế không thay thế. Tối thiểu 1 tài xế 17–22h." },
+  { id: "closing", kind: "hard", title: "Đủ người theo khung vận hành", detail: "Ít nhất 1 bếp và 1 bồi suốt giờ mở cửa; tài xế không thay thế" },
   { id: "shift-length", kind: "hard", title: "Ca sáng/tối, nghỉ đúng luật", detail: "Cho phép ca sáng và tối trong một ngày; 14–16:30h đóng cửa không tính công. Tối đa 8 giờ công/ngày, nghỉ đúng luật." },
   { id: "max-days", kind: "hard", title: "Tối đa 6 ngày liên tiếp", detail: "Không vượt 6 ngày liên tiếp và không vượt „Số ngày làm / tuần\" đã đặt." },
   { id: "days-off", kind: "hard", title: "Ngày nghỉ cố định", detail: "Không xếp ca vào ngày nghỉ cố định của người đó." },
@@ -45,7 +45,7 @@ export const RULES: readonly Rule[] = [
   { id: "fixed-shift", kind: "hard", title: "Ca cố định", detail: "Người có ca cố định chỉ làm đúng khung giờ đó." },
   { id: "holiday-duty", kind: "hard", title: "Trực ngày lễ", detail: "Ngày lễ quán mở thì người trực ngày lễ phải có ca." },
   { id: "contract-hours", kind: "soft", title: "Đủ giờ định mức", detail: "Xếp đủ giờ hợp đồng; tháng không đủ ngày (nghỉ, giới hạn ngày, làm quán khác) thì báo thiếu." },
-  { id: "peak-staff", kind: "soft", title: "Số người giờ cao điểm", detail: "Tài xế ưu tiên 17–22h, cho phép ban ngày; cao điểm 18–21h." },
+  { id: "peak-staff", kind: "soft", title: "Số người giờ cao điểm", detail: "Tài xế phân bổ theo định mức; ưu tiên 17–22h, cho phép ban ngày; cao điểm 18–21h." },
   { id: "day-weights", kind: "soft", title: "Ngày đông nhiều giờ hơn", detail: "Thứ 6–7 hệ số 1,5; còn lại hệ số 1." },
   { id: "own-shift-length", kind: "soft", title: "Độ dài ca riêng", detail: "Mỗi ngày làm nằm trong khoảng giờ đã đặt cho người đó." },
   { id: "spread-evenly", kind: "soft", title: "Rải đều trong tháng", detail: "Hợp đồng tháng phân bổ trên toàn tháng, không khóa vào ngân sách từng tuần. Độ dài ca mong muốn là ưu tiên mềm." },

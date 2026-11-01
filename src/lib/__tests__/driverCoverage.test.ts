@@ -2,12 +2,12 @@ import {it,expect} from "vitest";
 import {STORES,initialScheduleFor} from "../stores";
 import {generateSchedule} from "../scheduler";
 import {datesOfMonth} from "../demand";
-import {staffAt} from "../staffing";
+import {clip, staffAt} from "../staffing";
 import {checkShifts} from "../shiftChecks";
 it("drivers fill evening coverage before stacking peak shifts",()=>{
  const store=STORES[0],base=initialScheduleFor(store);
  const s={...base,employees:base.employees.filter(e=>e.station==="DRIVER").map(e=>({...e,targetMinutes:43*60}))};
- const shifts=generateSchedule({...s,rules:store.staffingRules,weights:store.dayWeights,demandProfile:store.demandProfile,storeTag:store.id});
+ const shifts=generateSchedule({...s,rules:[...store.staffingRules,{priority:"required",label:"Explicit driver coverage fixture",when:"17–22",minStaff:1,maxStaff:Infinity,scaled:false,who:e=>e.station==="DRIVER",windows:clip(1020,1320)}],weights:store.dayWeights,demandProfile:store.demandProfile,storeTag:store.id});
  const employees=new Map(s.employees.map(e=>[e.id,e]));
  let missing=0;
  for(const date of datesOfMonth(s.year,s.month)) for(let t=1020;t<1320;t+=30) {

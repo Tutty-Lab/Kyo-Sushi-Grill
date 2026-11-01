@@ -1,4 +1,3 @@
-import { isRequiredCoverage } from "../lib/coveragePolicy";
 import { useMemo, useState } from "react";
 import type { UseScheduleReturn } from "../hooks/useSchedule";
 import type { Shift } from "../types";
@@ -462,7 +461,6 @@ export function ScheduleTab({
                   title={`Nhân sự ít nhất có mặt, ${w.title}`}
                   labelClass={"text-sky-700"}
                   dates={gridDates}
-                  need={w.need}
                   value={(d) => groupStats.get(d)?.windows.get(w.key) ?? null}
                 />
               ))}
@@ -554,8 +552,7 @@ function CoverageRow({
         className="sticky left-0 z-10 bg-slate-50 border-t border-r border-slate-200 px-1.5 py-1 font-medium w-[80px] max-w-[80px] text-[10px] leading-tight"
         title={`${hard ? "Luật cứng" : "Luật mềm"}: ${label}, ${when} · số người vắng–đông`}
       >
-        {/* Nhãn ngắn để cột tên hẹp; đầy đủ ở tooltip. Chấm đỏ = luật cứng, vàng = mềm. */}
-        <span className={`mr-1 inline-block h-1.5 w-1.5 rounded-full align-middle ${hard ? "bg-rose-500" : "bg-amber-400"}`} />
+        {/* Full rule details remain available in the tooltip. */}
         {SHORT_RULE_LABELS[label] ?? label}
       </td>
       {dates.map((d) => {
@@ -575,11 +572,7 @@ function CoverageRow({
         return (
           <td
             key={d}
-            className={`border-t border-l border-slate-200 px-1 py-1 text-center ${
-              !short ? ""
-                : hard ? "bg-rose-50 font-semibold text-rose-700 outline outline-2 -outline-offset-2 outline-rose-500"
-                : "bg-amber-50 font-semibold text-amber-800 outline outline-2 -outline-offset-2 outline-amber-500"
-            }`}
+            className="border-t border-l border-slate-200 px-1 py-1 text-center"
             title={`ít nhất ${min}, đông nhất ${max} · luật: ${need}${Number.isFinite(allowed) ? `–${allowed}` : "+"} người`}
           >
             {min === max ? min : `${min}–${max}`}
@@ -606,25 +599,21 @@ const GROUP_WINDOWS = (["KITCHEN", "SERVICE", "DRIVER"] as const).flatMap((group
     key: `${group}-${key}`, range: group === "DRIVER" && key === "early" ? "17–18" : range,
     title: group === "DRIVER" && key === "early" ? "17:00–18:00" : title, group,
     from: group === "DRIVER" && key === "early" ? 1020 : from, to,
-    need: group === "DRIVER" ? (key === "noon" ? 0 : 1) : isRequiredCoverage(from) ? 1 : 0,
   })),
 );
 
-/** Dòng „ít nhất x người" của một nhóm trong khung giờ: đỏ khi thiếu so với luật, vàng khi trống. */
+/** Minimum headcount per department and time window, displayed neutrally. */
 function GroupWindowRow({
   label,
   title,
   labelClass,
   dates,
-  need,
   value,
 }: {
   label: string;
   title: string;
   labelClass: string;
   dates: string[];
-  /** Số người luật yêu cầu; 0 = chỉ để xem, không tô màu. */
-  need: number;
   value: (d: string) => number | null;
 }) {
   return (
@@ -637,10 +626,7 @@ function GroupWindowRow({
       </td>
       {dates.map((d) => {
         const n = value(d);
-        // Đỏ = thiếu so với luật cứng; vàng = khung không bắt buộc nhưng trống người.
-        const tone = n == null ? "text-slate-300"
-          : n < need ? "bg-rose-50 text-rose-700 font-semibold"
-          : n === 0 ? "bg-amber-50 text-amber-800" : "";
+        const tone = n == null ? "text-slate-300" : "";
         return (
           <td key={d} className={`border-t border-l border-slate-200 px-1 py-1 text-center ${tone}`}>
             {n ?? "–"}

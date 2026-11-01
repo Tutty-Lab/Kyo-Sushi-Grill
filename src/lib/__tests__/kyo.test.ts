@@ -9,6 +9,7 @@ import {checkShifts} from "../shiftChecks";
 it("Kyo roster, contracts and driver preferences",()=>{
  const s=initialScheduleFor(STORES[0]);
  expect(s.employees).toHaveLength(17);
+ expect(STORES[0].staffingRules.some(r=>r.label==="Tài xế buổi tối")).toBe(false);
  expect(s.employees.filter(e=>e.station==="KITCHEN").map(e=>e.id)).toEqual([1,2,3,4,5].map(n=>`kyo-${n}`));
  expect(s.employees.filter(e=>e.station==="SERVICE")).toHaveLength(8);
  expect(s.employees.map(e=>e.targetMinutes/60)).toEqual([160,100,120,120,170,120,160,120,5,20,20,20,5,28,15,25,20]);
